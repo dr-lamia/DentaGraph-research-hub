@@ -10,7 +10,7 @@
 | **JADE-Plus** | Jawbone lesion diagnosis | Agentic multimodal RAG | Clinical text + panoramic radiograph | **Yes: 40 retrospective cases** | Top-1, Top-3, reproducibility, ablation, response time | Agentic verification | Publication resource; code status should be checked before use |
 | **DGADS** | Dental question answering | Graph RAG + agentic RAG | Text/knowledge | Not patient-cohort validation | 500 internal MCQ, 260 external MCQ, open-ended scoring | Information-sufficiency checking | Not clearly established as open source in the publication |
 | **Interpretable pano multiagent system** | Panoramic report generation | Vision + report + validator agents | Panoramic + expert gaze maps | Expert-derived imaging data | correlation + IoU | **Yes: validator agent** | Conference abstract |
-| **DentaGraph** | Multispecialty patient-level clinical decision support | Router → multimodal analysis → specialist reasoning → aggregation → validator → repair → composer | Clinical text + dental images/radiographs | Planned broad validation with DentCaseBench and external real-patient data | Whole-system clinical success, diagnosis, management, routing, safety, validator/repair, escalation, reliability, cost | **Dedicated validator + bounded repair + human-review escalation** | Research project |
+| **DentaGraph** | Multispecialty patient-level clinical decision support | Router → multimodal analysis → specialist reasoning → aggregation → validator → repair → composer | Clinical text + dental images/radiographs | Planned broad validation with DentCaseBench and external real-patient data | **Whole-system clinical success + layer-level evaluation**, diagnosis, management, routing, safety, validator/repair, escalation, reliability, cost | **Dedicated validator + bounded repair + human-review escalation** | Research project |
 
 ## Where DentaGraph is positioned
 
@@ -37,5 +37,28 @@ DentaGraph can evaluate:
 - escalation
 - validator interception
 - repair success
+- **layer-by-layer performance**
+- **error interception and recovery across layers**
 - failure propagation
 - technical reliability
+
+## DentaGraph layer-level evaluation
+
+In addition to final-output performance, DentaGraph can evaluate each architecture layer:
+
+1. Intake / case structuring
+2. GP Router / triage
+3. Vision / multimodal interpretation
+4. Specialty reasoning
+5. Evidence aggregation
+6. Validator
+7. Repair
+8. Final Composer
+
+The primary endpoint remains **whole-system clinical success**. Layer-level metrics are secondary and are used to identify:
+- where an error first appeared;
+- whether a downstream layer intercepted it;
+- whether repair corrected it;
+- whether the final answer remained clinically acceptable.
+
+This lets DentaGraph study **error propagation and recovery**, not merely final answer accuracy.
